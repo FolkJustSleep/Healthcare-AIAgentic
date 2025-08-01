@@ -36,6 +36,6 @@ async def process_questions(input_question_csv, output_submission_csv):
     print(f"\n✅ Submission saved to: {output_submission_csv}")
 
 if __name__ == "__main__":
-    input_csv = "test copy.csv"             # This CSV must have 'id', 'question'
+    input_csv = "test.csv"             # This CSV must have 'id', 'question'
     output_csv = "submission.csv"           # This will be updated with 'id', 'answer'
     asyncio.run(process_questions(input_csv, output_csv))
