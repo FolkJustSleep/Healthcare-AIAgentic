@@ -1,6 +1,24 @@
 from langchain.schema import HumanMessage, AIMessage
 import json
-async def callmcp(client, llm, tools, question):
+from langchain.agents import Tool
+from langchain_mcp_adapters.client import MultiServerMCPClient
+from langchain_community.chat_models import ChatOpenAI
+import os
+async def callmcp(question):
+    client = MultiServerMCPClient({
+        "cmkl": {
+            "url": os.getenv("MCP_CMKL_URL"),
+            "transport": "streamable_http"
+        }
+    })
+    tools = await client.get_tools()
+    print("Discovered tools:", [tool.name for tool in tools])
+
+    llm = ChatOpenAI(model="typhoon-v2-70b-instruct", temperature=0.1, api_key=os.getenv("OPENAI_API_KEY_MCP"), base_url="https://api.opentyphoon.ai/v1")
+     # Create system message with tools information
+    tool_descriptions = []
+    for tool in tools:
+        tool_descriptions.append(f"- {tool.name}: {tool.description}")
     tool_descriptions = []
     for tool in tools:
         tool_descriptions.append(f"- {tool.name}: {tool.description}")
