@@ -1,59 +1,37 @@
 import os
-import json
+import asyncio
+from langchain.agents import Tool
+from langchain_mcp_adapters.client import MultiServerMCPClient
+from langchain_community.chat_models import ChatOpenAI
+from mcptools import callmcp
 from dotenv import load_dotenv
-from google import genai
-from google.genai import types
-from mcp_tools import lookup_patient
-from pydantic import BaseModel, Field
-
 load_dotenv()
-
-gemini_api_key = os.getenv("GEMINI_API_KEY")
-
-client = genai.Client(api_key=gemini_api_key)
-
-lookup_patient_function = {
-    "name": "lookup_patient",
-    "description": "Look up patient information by ID.",
-    "parameters": {
-        "type": "object",
-        "properties": {
-            "patient_id": {
-                "type": "string",
-                "description": "The ID of the patient to look up.",
-            },
-        },
-        "required": ["patient_id"],
-    },
-}
-
-systemprompt = "You are a helpful medical assistant. You can look up patient information using the MCP server only. and if you don't know the answer, just say 'I don't know'."
-userprompt = "I want information for patient with id POO1."
-message = {
-            "role": "system",
-            "parts": [
-                {"text": systemprompt},
-            ],
-            "role": "user",
-            "parts": [
-                {"text": userprompt},
-            ],
+       
+async def main():
+    client = MultiServerMCPClient({
+        "cmkl": {
+            "url": "https://mcp-hackathon.cmkl.ai/mcp",
+            "transport": "streamable_http"
         }
+    })
+    tools = [
+        await client.get_tools(),
 
-tools = types.Tool(function_declarations=[lookup_patient_function])
-config = types.GenerateContentConfig(tools=[tools])
-response = client.models.generate_content(
-    model="gemini-2.5-flash",
-    contents=message,
-    config=config,
-)
-if response.candidates[0].content.parts[0].function_call:
-    function_call = response.candidates[0].content.parts[0].function_call
-    print(f"Function to call: {function_call.name}")
-    print(f"Arguments: {function_call.args}")
-    #  In a real app, you would call your function here:
-    result = lookup_patient(**function_call.args)
-    print(f"Result: {result}")
-else:
-    print("No function call found in the response.")
-    print(response.text)
+    ]
+    # print("Discovered tools:", [tool.name for tool in tools])
+
+    llm = ChatOpenAI(model="typhoon-v2-70b-instruct", temperature=0.1, api_key=os.getenv("OPENAI_API_KEY_MCP"), base_url="https://api.opentyphoon.ai/v1")
+     # Create system message with tools information
+    tool_descriptions = []
+    for tool in tools:
+        tool_descriptions.append(f"- {tool.name}: {tool.description}")
+    while True:
+        input_text = input("Ask/Exit: ")
+        if input_text.lower() == "exit":
+            break
+        elif input_text.lower() == "ask":
+            question = input("Enter your question: ")
+            await callmcp(client, llm, tools, question)
+            
+if __name__ == "__main__":
+        asyncio.run(main())
