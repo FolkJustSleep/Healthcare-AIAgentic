@@ -1,18 +1,37 @@
 import os
+import asyncio
+from langchain.agents import Tool
+from langchain_mcp_adapters.client import MultiServerMCPClient
+from langchain_community.chat_models import ChatOpenAI
+from mcptools import callmcp
 from dotenv import load_dotenv
-from google import genai
-from google.genai import types
-
 load_dotenv()
+       
+async def main():
+    client = MultiServerMCPClient({
+        "cmkl": {
+            "url": "https://mcp-hackathon.cmkl.ai/mcp",
+            "transport": "streamable_http"
+        }
+    })
+    tools = [
+        await client.get_tools(),
 
-gemini_api_key = os.getenv('GEMINI_API_KEY')
+    ]
+    # print("Discovered tools:", [tool.name for tool in tools])
 
-client = genai.Client(api_key=gemini_api_key)
-response = client.models.generate_content(
-    model="gemini-2.5-flash",
-    contents="Explain how AI works ",
-    config=types.GenerateContentConfig(
-        thinking_config=types.ThinkingConfig(thinking_budget=0) # Disables thinking
-    ),
-)
-print(response.text)
+    llm = ChatOpenAI(model="typhoon-v2-70b-instruct", temperature=0.1, api_key=os.getenv("OPENAI_API_KEY_MCP"), base_url="https://api.opentyphoon.ai/v1")
+     # Create system message with tools information
+    tool_descriptions = []
+    for tool in tools:
+        tool_descriptions.append(f"- {tool.name}: {tool.description}")
+    while True:
+        input_text = input("Ask/Exit: ")
+        if input_text.lower() == "exit":
+            break
+        elif input_text.lower() == "ask":
+            question = input("Enter your question: ")
+            await callmcp(client, llm, tools, question)
+            
+if __name__ == "__main__":
+        asyncio.run(main())
