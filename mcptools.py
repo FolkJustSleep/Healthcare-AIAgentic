@@ -68,12 +68,11 @@ async def callmcp(question):
                 messages.append({"role": "user", "content": f"Tool result: {result}"})
                 
                 final_response = await llm.ainvoke([HumanMessage(content=f"Tool result: {result}")])
-                print("Final response:", final_response.content)
+                return final_response.content
             else:
-                print(f"Tool {tool_name} not found")
+                return f"Tool {tool_name} not found"
         else:
-            print("Agent response:", response_content)
+            return response_content
     except json.JSONDecodeError:
         # Not a tool call, just a regular response
-        print("Agent response:", response_content)
- 
+        return response_content

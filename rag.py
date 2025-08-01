@@ -45,6 +45,7 @@ DATA_PATH = r"data"
 CHROMA_PATH = r"chroma_db"
 print(f"Using data path: {DATA_PATH}")
 # Load and process PDF documents
+print("Loading documents from PDF files...")
 loader = PyPDFDirectoryLoader(DATA_PATH)
 documents = loader.load()
 print(f"Loaded {len(documents)} documents from {DATA_PATH}")
@@ -173,9 +174,9 @@ Original Question:
     else:
         print(" Initial answer was sufficient.")
         return initial_answer
-while True:
-        user_input = input("You: ")
-        response = generate_answer_with_feedback(user_input)
-        print(f"AI: {response}")
-        if user_input.lower() == "exit" or user_input.lower() == "quit":
-            break
+# while True:
+#         user_input = input("You: ")
+#         response = generate_answer_with_feedback(user_input)
+#         print(f"AI: {response}")
+#         if user_input.lower() == "exit" or user_input.lower() == "quit":
+#             break
