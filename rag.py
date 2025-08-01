@@ -9,9 +9,7 @@ from langchain_community.chat_models import ChatOpenAI
 from huggingface_hub import InferenceClient
 import os
 import hashlib
-import openai
 import time
-import random
 from requests.exceptions import HTTPError
 # Load environment variables
 load_dotenv()
@@ -107,7 +105,7 @@ for idx, doc_chunk in enumerate(chunks):
             metadatas=[{"chunk_index": idx, "context": context}]
         )
         print(f"[\u2713] Added chunk {idx}")
-        time.sleep(3)
+        time.sleep(5)
     except Exception as e:
         print(f"[\u2717] Failed to add chunk {idx}: {e}")
         time.sleep(3)

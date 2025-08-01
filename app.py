@@ -4,7 +4,6 @@ from dotenv import load_dotenv
 load_dotenv()
        
 async def main():
-   
     while True:
         input_text = input("Ask/Exit: ")
         if input_text.lower() == "exit":
