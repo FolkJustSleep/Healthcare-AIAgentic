@@ -3,6 +3,7 @@ import pandas as pd
 from mcptools import callmcp
 from dotenv import load_dotenv
 from rag import generate_answer_with_feedback
+import time
 
 load_dotenv()
 
@@ -23,6 +24,7 @@ async def process_questions(input_question_csv, output_submission_csv):
             respond = await callmcp(full_question)
             prompt = full_question + " this is the information from mcp " + respond
             answer = generate_answer_with_feedback(prompt)
+            time.sleep(5)
         except Exception as e:
             answer = f"❌ ERROR: {str(e)}"
 
@@ -34,6 +36,6 @@ async def process_questions(input_question_csv, output_submission_csv):
     print(f"\n✅ Submission saved to: {output_submission_csv}")
 
 if __name__ == "__main__":
-    input_csv = "questions.csv"             # This CSV must have 'id', 'question'
+    input_csv = "test copy.csv"             # This CSV must have 'id', 'question'
     output_csv = "submission.csv"           # This will be updated with 'id', 'answer'
     asyncio.run(process_questions(input_csv, output_csv))

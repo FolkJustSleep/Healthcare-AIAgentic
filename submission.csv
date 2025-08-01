@@ -1,0 +1,21 @@
+id,answer
+1,ค. Emergency
+2,ข. 3 บาท/เม็ด
+3,ก. เจ็บหน้าอกเฉียบพลันรุนแรง
+4,"คำตอบคือ ""ง. ไม่มีข้อใดถูกต้อง"" เพราะทั้งหมดเป็นชื่อที่ใช้เรียกสิทธิหลักประกันสุขภาพแห่งชาติในประเทศไทย โดยเฉพาะ ""สิทธิบัตรทอง"" และ ""สิทธิ 30 บาทรักษาทุกโรค"" เป็นชื่อที่ใช้เรียกสิทธิหลักประกันสุขภาพแห่งชาติในช่วงเวลาต่างๆ ดังนั้น ทั้งสามข้อจึงรวมอยู่ในสิทธิประโยชน์ของผู้มีสิทธิหลักประกันสุขภาพแห่งชาติ."
+5,ค่าบริการเคลือบฟลูออไรด์ชนิดเข้มข้นสูงเฉพาะที่มีอัตราเหมาจ่าย 100 บาทต่อครั้ง ดังนั้นคำตอบที่ถูกต้องคือ ค. 100 บาท
+6,ข้อมูลที่ให้มาไม่เพียงพอในการตอบคำถามนี้ เนื่องจากไม่มีข้อมูลเกี่ยวกับอัตราจ่ายแบบเหมาจ่ายสำหรับผู้ป่วยเบาหวานชนิดที่ 1 ในแต่ละเดือนของปี 2568 ดังนั้นจึงไม่สามารถเลือกคำตอบที่ถูกต้องได้
+7,ง. ไม่ได้จำกัดอายุ
+8,"❌ ERROR: Error code: 429 - {'detail': ""You've hit the rate limit for this service. For higher request limits, consider using the Typhoon model at https://api.together.ai/models.""}"
+9,"❌ ERROR: Error code: 429 - {'detail': ""You've hit the rate limit for this service. For higher request limits, consider using the Typhoon model at https://api.together.ai/models.""}"
+10,"❌ ERROR: Error code: 429 - {'detail': ""You've hit the rate limit for this service. For higher request limits, consider using the Typhoon model at https://api.together.ai/models.""}"
+11,"ข. 2,400 บาท"
+12,ง. ต้องเช็คกับประกัน
+13,ปริมาณการใช้ยาน้ำมันกัญชาต่อคนต่อเดือนสูงสุดคือ 4 ขวด (ข้อ 2)
+14,คำตอบที่ดีที่สุดคือ ข. แผนกต่อมไร้ท่อ (Endocrinology) ซึ่งเป็นแผนกที่ให้บริการ Hormone Therapy เนื่องจากแผนกนี้มีความเชี่ยวชาญในการรักษาและจัดการกับปัญหาที่เกี่ยวข้องกับต่อมไร้ท่อและฮอร์โมนต่าง ๆ ในร่างกาย
+15,คำตอบที่ดีที่สุดคือ ข. 50 บาท
+16,ข. เมื่อแพทย์ประเมินและมีข้อบ่งชี้ที่เหมาะสม
+17,"❌ ERROR: Error code: 429 - {'detail': ""You've hit the rate limit for this service. For higher request limits, consider using the Typhoon model at https://api.together.ai/models.""}"
+18,"❌ ERROR: Error code: 429 - {'detail': ""You've hit the rate limit for this service. For higher request limits, consider using the Typhoon model at https://api.together.ai/models.""}"
+19,"❌ ERROR: Error code: 429 - {'detail': ""You've hit the rate limit for this service. For higher request limits, consider using the Typhoon model at https://api.together.ai/models.""}"
+20,"❌ ERROR: Error code: 429 - {'detail': ""You've hit the rate limit for this service. For higher request limits, consider using the Typhoon model at https://api.together.ai/models.""}"
